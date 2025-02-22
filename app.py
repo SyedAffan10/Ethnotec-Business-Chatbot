@@ -4,6 +4,8 @@ import streamlit as st
 from openai import OpenAI
 from dotenv import load_dotenv
 import pyperclip
+pyperclip.set_clipboard("windows")
+
 
 # Load API Key from .env file
 load_dotenv()
