@@ -3,9 +3,6 @@ import sqlite3
 import streamlit as st
 from openai import OpenAI
 from dotenv import load_dotenv
-import pyperclip
-pyperclip.set_clipboard("windows")
-
 
 # Load API Key from .env file
 load_dotenv()
@@ -155,11 +152,10 @@ if selected_client:
             st.chat_message(chat["role"]).write(chat["content"])
 
         with col2:
-            if chat["role"] == "assistant":  # Only add copy button for AI responses
+            if chat["role"] == "assistant":  # Only allow copying AI responses
                 copy_text = chat["content"]
-                if st.button(f"📋 Copy", key=f"copy_{chat['content']}"):
-                    pyperclip.copy(copy_text)  # Copies text to clipboard
-                    st.success("Copied to clipboard!")
+                with st.expander("📋"):
+                    st.text_area("Copy the response:", copy_text, height=100)
 
 
     # User input (Client Response)
